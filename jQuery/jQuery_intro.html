@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+        <title>jQuery简介 </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">jQuery简介</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">jQuery简介</a>
+<ul>
+<li><a href="#toc_1.1">下载与安装</a>
+<ul>
+<li><a href="#toc_1.1.1">方法1 CDN</a>
+<li><a href="#toc_1.1.2">方法2 下载</a>
+<li><a href="#toc_1.1.3">方法3 Git</a>
+</ul>
+<li><a href="#toc_1.2">Hello jQuery</a>
+<li><a href="#toc_1.3">参考资料</a>
+</ul>
+</ul>
+</div>
+<p>
+jQuery是一个JavaScript函数库，该函数库可以简化web应用的开发过程中HTML元素遍历，事件处理，动画以及Ajax交互等操作。如同jQuery网站首页所说，jQuery可以使你花费更少的时间完成更多的工作。
+</p>
+
+<p>
+jQuery库包含以下特性：<sup><small>[1]</small></sup>
+</p>
+<ul>
+<li>
+HTML元素选取
+
+<li>
+HTML元素操作
+
+<li>
+CSS操作
+
+<li>
+HTML事件函数
+
+<li>
+JavaScript特效和动画
+
+<li>
+HTML DOM遍历和修改
+
+<li>
+Ajax
+
+<li>
+Utilities
+
+</ul>
+
+<h2 id="toc_1.1">下载与安装</h2>
+<h3 id="toc_1.1.1">方法1 CDN</h3>
+<p>
+由于jQuery的广泛使用，Google,Microsoft等网站都提供了jQuery的CDN，可以在<code>script</code>标签的<code>src</code>中直接填入地址即可。好处是充分利用带宽，减少本站耗费的流量。
+</p>
+<ul>
+<li>
+Google: <a href="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js</a>
+
+<li>
+Microsoft: <a href="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js">http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js</a>
+
+<li>
+jQuery: <a href="http://code.jquery.com/jquery-1.7.2.min.js">http://code.jquery.com/jquery-1.7.2.min.js</a> 
+
+</ul>
+<h3 id="toc_1.1.2">方法2 下载</h3>
+<p>
+当然，本地开发的话，有个副本还是比较方便的。最新的jQuery<a href="http://blog.jquery.com/2012/03/21/jquery-1-7-2-released/">下载地址</a>，分为压缩版和未压缩版，压缩版体积小，适合用在生产环境中，未压缩的版本可以平时学习所用。
+</p>
+<h3 id="toc_1.1.3">方法3 Git</h3>
+<p>
+jQuery是一个开源项目，代码托管在<a href="https://github.com/jquery/jquery">Github</a>，想要获得最新的测试版本可以在Github上下载回来，关注该项目，甚至可以为该项目贡献源码。不过，测试版本不要用在实际生产环境中。
+</p>
+
+<h2 id="toc_1.2">Hello jQuery</h2>
+<p>
+下面我们简单地写个测试页面当作范例。当点击页面中的超级链接的时候，弹出“Hello world”对话框。
+</p>
+<pre  class="brush:xml">
+&lt;html&gt;                                                                  
+&lt;head&gt;                                                                  
+	&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;          
+	&lt;script type="text/javascript"&gt;                                         
+	      // JavaScript代码添加在此处                                    
+	&lt;/script&gt;                                                               
+&lt;/head&gt;                                                                 
+&lt;body&gt;                                                                  
+	&lt;!-- 文本内容添加在此处 --&gt;                                        
+&lt;/body&gt;                                                                 
+&lt;/html&gt;
+</pre>
+<p>
+记得把jQuery的脚本地址更换成自己的地址。在<code>&lt;body&gt;</code>标签中加入超级链接标签：
+</p>
+<pre  class="brush:xml">
+&lt;a href=""&gt;点我&lt;/a&gt;
+</pre>
+<p>
+然后在JavaScript代码添加处加入以下代码：
+</p>
+<pre  class="brush:javascript">
+$(document).ready(function(){
+	$("a").click(function(){
+		alert("Hello world!");
+		});
+	});
+</pre>
+<p>
+保存，刷新页面，点击“点我”，可以看到弹出了"hello <a href=".html">.html</a>
+</p>
+<h2 id="toc_1.3">参考资料</h2>
+<ul>
+<li>
+[ 1 ] <a href="http://www.w3school.com.cn/jquery/jquery_intro.asp">w3school</a>
+
+<li>
+[ 2 ] <a href="http://docs.jquery.com/Main_Page">jQuery官方介绍</a>
+
+</ul>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+

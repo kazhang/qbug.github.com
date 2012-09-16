@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+        <title>coding</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">Python 字符编码</h1>
+<h2 id="toc_1.1">注明编码</h2>
+<p>
+Python按照系统默认的字符编码，一般为ASCII,若代码中出现中文字符等非ASCII字符，编译则会出错。所以应当在代码开头注明所用编码
+</p>
+<pre>
+#coding=utf-8
+</pre>
+<h2 id="toc_1.2">转码</h2>
+<p>
+Python提供了encode和decode两个函数对字符串进行编码和解码，如下边这个例子将UTF-8转换为GB2312：
+</p>
+<pre>
+str1="中文字符"
+str2=str1.decode('utf-8').encode('gb2312')
+</pre>
+<h2 id="toc_1.3">字符串长度</h2>
+<p>
+如果直接对含中文字符的字符串串进行len操作，得到的不是正确的长度（貌似Python用3个\x__类型字符代替一个中文字符），而应先对其解码，再求其长度。
+</p>
+<pre>
+str="中文字符"
+print len(str)
+str=str.decode('utf-8')
+print len(str)
+</pre>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+

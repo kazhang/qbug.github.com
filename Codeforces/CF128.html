@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+        <title>Codeforces Round #128(Div.2)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">Codeforces Round #128(Div.2)</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Codeforces Round #128(Div.2)</a>
+<ul>
+<li><a href="#toc_1.1">A.Two Problems</a>
+<ul>
+<li><a href="#toc_1.1.1">问题描述：</a>
+<li><a href="#toc_1.1.2">思路：</a>
+</ul>
+<li><a href="#toc_1.2">B.Game on Paper</a>
+<ul>
+<li><a href="#toc_1.2.1">问题描述：</a>
+<li><a href="#toc_1.2.2">思路：</a>
+</ul>
+<li><a href="#toc_1.3">C.Photograhper</a>
+<ul>
+<li><a href="#toc_1.3.1">问题描述：</a>
+<li><a href="#toc_1.3.2">思路：</a>
+</ul>
+<li><a href="#toc_1.4">D.Hit Ball</a>
+<ul>
+<li><a href="#toc_1.4.1">问题描述：</a>
+<li><a href="#toc_1.4.2">思路：</a>
+</ul>
+<li><a href="#toc_1.5">E.Transportation</a>
+<ul>
+<li><a href="#toc_1.5.1">问题描述：</a>
+<li><a href="#toc_1.5.2">思路：</a>
+</ul>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1" class="justcenter">A.Two Problems</h2>
+<h3 id="toc_1.1.1">问题描述：</h3>
+<p>
+求解方程 a-i*d<sub><small>a</small></sub>+b-j*d<sub><small>b</small></sub>=x 是否存在整数i,j(0&lt;=i,j&lt;=t-1)使之成立。
+</p>
+<h3 id="toc_1.1.2">思路：</h3>
+<p>
+两个for循环枚举i,j。留意只做一个题和一个题都不做的情况。
+</p>
+
+
+<h2 id="toc_1.2" class="justcenter">B.Game on Paper</h2>
+<h3 id="toc_1.2.1">问题描述：</h3>
+<p>
+一个人把方格纸上的格子按给定顺序涂黑，问涂完第几个格子的时候，纸上出现边长为3的黑正方形。
+</p>
+<h3 id="toc_1.2.2">思路：</h3>
+<p>
+每涂一个格子(i,j)，check一次以(i-2,j-2),(i-2,j-1),(i-2,j),(i-1,j-2)...(i,j)为左上角的边长为3的正方形内的格子是否全是黑的。
+</p>
+
+
+<h2 id="toc_1.3" class="justcenter">C.Photograhper</h2>
+<h3 id="toc_1.3.1">问题描述：</h3>
+<p>
+一个相机有容量d,有n个顾客，每个顾客想照x<sub><small>i</small></sub>张低品质照片y<sub><small>i</small></sub>张高品质照片，每张低品质照片占用空间a，高品质照片占用空间b。求最多能接待满足多少名顾客的需求，输出能满足的顾客的编号。
+</p>
+<h3 id="toc_1.3.2">思路：</h3>
+<p>
+计算每个顾客需要占用的空间，按占用空间由小到大排序，从头累加至相机没有足够空间。注意 <strong>精度</strong> 。
+</p>
+
+
+<h2 id="toc_1.4" class="justcenter">D.Hit Ball</h2>
+<h3 id="toc_1.4.1">问题描述：</h3>
+<p>
+一个人处于房间中，他到左右两面墙的距离均为a/2，距他正面的墙距离为m，房间高为b，人脚下有一球，给出人踢球后球的速度向量(v<sub><small>x</small></sub>,v<sub><small>y</small></sub>,v<sub><small>z</small></sub>)(球做匀速运动，无视摩擦力，刚性碰撞），问球撞到他正面的墙的位置坐标。
+</p>
+<h3 id="toc_1.4.2">思路：</h3>
+<p>
+几何题，或者说物理题。由于向量的特点，我们单独考虑它的分量，已知y轴的速度为v<sub><small>y</small></sub>，那么球飞行的时间肯定就是time=m/v<sub><small>y</small></sub>，接下来我们单独考虑z方向上的运动，如果无视墙的存在，在球结束运动前，在z方向上运动的距离一定是zdis=v<sub><small>z</small></sub>*time,由于有墙，那么球就有可能在上下两面墙间来回碰撞，我们知道，球碰到墙壁后，只会使一个速度的分向量反向，其余不变。比如，撞到地上时，只会使v<sub><small>z</small></sub>反向，撞到两边的墙时，只会使v<sub><small>x</small></sub>反向。这样问题就简单了，求出zhits=(int)zdis/b，得出球撞击上下两面墙的总次数，如果zhits为偶数，则最终球是从下往上撞到正面的墙，位置为z=zdis-zhits*b;反之，则最终球由上往下撞到正面的墙，位置为z=b-(zdis-zhits*b)。x方向上的运动同理，虽然x方向上人是处于中间位置的，但xdis减掉a/2.0和z方向上也是一样的（也有可能在球撞到两边墙之前就已经撞的正面的墙了）。
+</p>
+
+<h2 id="toc_1.5" class="justcenter">E.Transportation</h2>
+<h3 id="toc_1.5.1">问题描述：</h3>
+<p>
+Valera需要将n个机器人运送到d米远的地方，这些机器人都可以使用燃料自行走动。有部分机器人可以拖别的机器人走动，被拖的机器人不耗燃料。给出每个机器人可以直接拖动的机器人的数量c<sub><small>i</small></sub>、可以到达的距离l<sub><small>i</small></sub>、耗费的燃料量f<sub><small>i</small></sub>。问Valera最多能带多少机器人到目的地，至少要耗多少燃料。
+</p>
+<h3 id="toc_1.5.2">思路：</h3>
+<p>
+对于可以拖动别的机器人的机器人集合carry，只要有一辆可以走到目的地，那么这个机器人就可以拖动整个carry集合的机器人，而且还能提供seats=sum{carry[i].c}-(carry.size()-1)个额外的空位，那么我们只需要在carry集合中挑一个能到达目的地的且耗燃料最少的机器人带队即可，minFuel为该机器人的耗燃料量，如果seats&lt;noCarry.size()，即额外的空位不足以拖走所以不能拖机器人的机器人，那么将除领队外的机器人按耗燃料量由小到大排序,从头开始挑选能够自己走到目的地的机器人，每挑出一个，seats加1，minFuel加上该机器人的耗燃料量，直到seats&gt;=noCarray.size()或者遍历完。最后能带走的机器人数就是carry.size()+min(seats,noCarry.size())。
+</p>
+
+<p>
+注意考虑不需要机器人拖动，机器人全部自己走的情况。
+</p>
+
+<p>
+注意精度。
+</p>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
