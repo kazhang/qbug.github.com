@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+        <title>glob</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">glob</h1>
+<p>
+查找匹配一个模式的文件路径，比如查找<code>/var/log/*.txt</code>会返回所有以txt为文件后缀的文件路径。
+</p>
+<pre>
+array glob (string $pattern [,int $flags=0])
+</pre>
+<p>
+flags:
+</p>
+<ul>
+<li>
+GLOB_MARK - 在每个返回的项目中加一个斜线
+
+<li>
+GLOB_NOSORT - 按照文件在目录中出现的原始顺序返回（不排序）
+
+<li>
+GLOB_NOCHECK - 如果没有文件匹配则返回用于搜索的模式
+
+<li>
+GLOB_NOESCAPE - 反斜线不转义元字符
+
+<li>
+GLOB_BRACE - 扩充 {a,b,c} 来匹配 'a'，'b' 或 'c'
+
+<li>
+GLOB_ONLYDIR - 仅返回与模式匹配的目录项
+
+</ul>
+
+<p>
+例子：
+</p>
+<pre  class="brush:php">
+&lt;?php
+foreach (glob("*.txt") as $filename) {
+    echo "$filename size " . filesize($filename) . "\n";
+}
+?&gt;
+</pre>
+<p>
+输出类似：
+</p>
+<pre>
+funclist.txt size 44686
+funcsummary.txt size 267625
+quickref.txt size 137820
+</pre>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
