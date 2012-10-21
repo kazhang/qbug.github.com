@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+		<script type="text/javascript" src="../shBrushCpp.js"></script>
+        <title>静态链接库</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+
+  	var _gaq = _gaq || [];
+  	_gaq.push(['_setAccount', 'UA-20545506-1']);
+  	_gaq.push(['_setDomainName', 'zkgo.info']);
+ 	 _gaq.push(['_trackPageview']);
+
+  	(function() {
+  	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   	 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   	 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  	})();
+
+	</script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">静态链接库</h1>
+<blockquote>
+为什么系统要支持库的概念呢？以ANSI C为例，它定义了一组广泛的标准I/O、字符串操作和整数数学运算。它们在libc.a库中，对于每个C程序来说都是可用的。ANSI C还在libm.a库中定义了一组广泛的浮点数学函数，如sin、cos和sqrt。
+。。。。。。
+静态库概念被提出来，以解决这些不同方法的缺点。相关的函数可以被编译为独立的目标模块，然后封装成一个单独的静态库文件。然后，应用程序可以通过在命令行上指定单独的文件名字来使用这些在库中定义的函数。比如使用标准C库和数学库中函数的程序可以用形式如下的命令行来编译和链接：
+unix&gt; gcc main.c /usr/lib/libm.a /usr/lib/libc.a	-- &lt;&lt;深入理解计算机系统&gt;&gt;
+</blockquote>
+<h2 id="toc_1.1">创建静态库</h2>
+<p>
+比如下面两段向量加法和乘法的程序：
+</p>
+
+<pre class="brush:cpp">
+//addvec.c
+void addvec(int *x,int *y,int *z,int n)
+{
+	int i;
+	for(i=0;i&lt;n;i++)
+		z[i]=x[i]+y[i];
+}
+</pre>
+
+<pre  class="brush:cpp">
+//multvec.c
+void multvec(int *x,int *y,int *z,int n)
+{
+	int i;
+	for(i=0;i&lt;n;i++)
+		z[i]=x[i]*y[i];
+}
+</pre>
+
+<p>
+首先编译成.o文件：
+</p>
+<pre>
+unix &gt; gcc -c addvec.c multvec.c
+</pre>
+
+<p>
+再打包：
+</p>
+<pre>
+unix &gt; ar rcs libvector.a addvec.o multvec.o
+</pre>
+
+<p>
+静态库<code>libvector.a</code>制作完成
+</p>
+
+<h2 id="toc_1.2">静态库的使用</h2>
+<p>
+下面这段程序将调用<code>addvec</code>:
+</p>
+<pre  class="brush:cpp">
+//main.c
+#include &lt;stdio.h&gt;
+#include "vector.h"
+
+int x[2]={1,2};
+int y[2]={3,4};
+int z[2];
+
+int main()
+{
+	addvec(x,y,z,2);
+	printf("z =[%d %d]\n",z[0],z[1]);
+	return 0;
+}
+</pre>
+<p>
+<code>vector.h</code>中是<code>addvec</code>的原型。下面编译main.c
+</p>
+<pre>
+unix &gt; gcc -c main.c
+unix &gt; gcc -static -o p main.o libvector.a
+</pre>
+<p>
+编译完成。
+</p>
+
+<p>
+需要注意的是：如果定义一个符号的库出现在引用这个符号的目标文件之前，那么引用就不能被解析，链接就会失败。通常将库放在命令行的结尾。如果库文件之间有相互引用，就需要拓扑排序一下，也可以在命令行上重复库。
+</p>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
