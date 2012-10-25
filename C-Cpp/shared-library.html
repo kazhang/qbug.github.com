@@ -1,0 +1,217 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+		<script type="text/javascript" src="../shBrushCpp.js"></script>
+        <title>动态共享链接库</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+
+  	var _gaq = _gaq || [];
+  	_gaq.push(['_setAccount', 'UA-20545506-1']);
+  	_gaq.push(['_setDomainName', 'zkgo.info']);
+ 	 _gaq.push(['_trackPageview']);
+
+  	(function() {
+  	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   	 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   	 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  	})();
+
+	</script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">动态共享链接库</h1>
+<blockquote>
+共享库(shared library)是致力于解决静态库缺陷的一个现代创新产物。共享库是一个目标模块，在运行时，可以加载到任意的储存器地址，并和一个在储存器中的程序链接起来。这个过程称为动态链接(dynamic linking)，是由一个叫做动态链接器(dynamic linker)的程序执行的。
+</blockquote>
+
+<h2 id="toc_1.1">构造共享库</h2>
+<p>
+仍以<a href="static-library.html">静态链接库</a>中的程序为例：
+</p>
+
+<pre class="brush:cpp">
+//addvec.c
+void addvec(int *x,int *y,int *z,int n)
+{
+	int i;
+	for(i=0;i&lt;n;i++)
+		z[i]=x[i]+y[i];
+}
+</pre>
+
+<pre  class="brush:cpp">
+//multvec.c
+void multvec(int *x,int *y,int *z,int n)
+{
+	int i;
+	for(i=0;i&lt;n;i++)
+		z[i]=x[i]*y[i];
+}
+</pre>
+
+<p>
+执行下面的编译指令：
+</p>
+<pre>
+unix&gt; gcc -shared -fPIC -o libvector.so addvec.c multvec.c
+</pre>
+<p>
+<code>-fPIC</code>选项指示编译器生成与位置无关的代码，<code>-shared</code>选项指示链接器创建一个共享的目标文件。
+</p>
+
+<h2 id="toc_1.2">程序加载时加载和链接共享库</h2>
+<p>
+测试代码：
+</p>
+<pre  class="brush:cpp">
+//main.c
+#include &lt;stdio.h&gt;
+#include "vector.h"
+
+int x[2]={1,2};
+int y[2]={3,4};
+int z[2];
+
+int main()
+{
+	addvec(x,y,z,2);
+	printf("z =[%d %d]\n",z[0],z[1]);
+	return 0;
+}
+</pre>
+<p>
+执行下面的指令:
+</p>
+<pre>
+unix&gt; gcc -o p main.c ./libvector.so
+</pre>
+<p>
+libvector.so前面的./不可以省略，运行时需要这个完整地址。
+</p>
+
+<h2 id="toc_1.3">程序运行时加载和链接共享库</h2>
+<p>
+应用程序可能在它运行时要求动态链接器加载和链接任意共享库，而无需在编译时链接那些库到应用中。
+Linux系统为动态链接器提供了一个简单的接口，允许应用程序在运行时加载和链接共享库。
+</p>
+<pre  class="brush:cpp">
+#include &lt;dlfcn.h&gt;
+
+void *dlopen(const char *filename,int flag);
+</pre>
+<p>
+<code>dlopen</code>函数加载和链接共享库filename。用以前带<code>RTLD_GLOBAL</code>选项打开的库解析filename中的外部符号。如果当前可执行文件是带<code>-rdynamic</code>选项编译的，那么对符号解析而言，它的全局符号也是可用的。flag参数必须要么包括<code>RTLD_NOW</code>，该标志告诉链接器立即解析对外部符号的引用，要么包括<code>RTLD_LAZY</code>标志，该标志指示链接器推迟符号解析直到执行来自库中的代码。这两个值中的任意一个都可以和<code>RTLD_GLOBAL</code>标志取或。
+</p>
+<pre  class="brush:cpp">
+#include &lt;dlfcn.h&gt;
+
+void *dlsym(void *handle,char *symbol);
+</pre>
+<p>
+<code>dlsym</code>函数的输入是一个指向前面已经打开共享库的句柄和一个符号名字，如果该符号存在，就返回符号的地址，否则返回<code>NULL</code>。
+</p>
+<pre  class="brush:cpp">
+#include &lt;dlfcn.h&gt;
+
+int dlclose(void *handle);
+</pre>
+<p>
+如果没有其他共享库正在使用这个共享库，<code>dlclose</code>函数就卸载该共享库。
+</p>
+<pre  class="brush:cpp">
+#include &lt;dlfcn.h&gt;
+
+const char *dlerror(void);
+</pre>
+<p>
+<code>dlerror</code>函数返回一个字符串，它描述的是调用<code>dlopen</code>、<code>dlsym</code>或者<code>dlclose</code>函数时发生的最近的错误，如果没有错误发生，就返回<code>NULL</code>。
+</p>
+
+<p>
+下面的代码展示了如何利用这些接口：
+</p>
+<pre  class="brush:cpp">
+//dll.c
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt;
+
+int x[2]={1,2};
+int y[2]={3,4};
+int z[2];
+
+int main()
+{
+	void *handle;
+	void (*addvec)(int *,int *,int *,int);
+	char *error;
+
+	handle=dlopen("./libvector.so",RTLD_LAZY);
+	if(!handle)
+	{
+		fprintf(stderr,"%s\n",dlerror());
+		exit(1);
+	}
+
+	addvec=dlsym(handle,"addvec");
+	if((error =dlerror()) != NULL)
+	{
+		fprintf(stderr,"%s\n",error);
+		exit(1);
+	}
+
+	addvec(x,y,z,2);
+	printf("z = [%d %d]\n",z[0],z[1]);
+
+	if(dlclose(handle)&lt;0)
+	{
+		fprintf(stderr,"%s\n",dlerror());
+		exit(1);
+	}
+	return 0;
+}
+</pre>
+<p>
+按以下方式调用GCC:
+</p>
+<pre>
+unix&gt; gcc -rdynamic -o p dll.c -ldl
+</pre>
+
+<h2 id="toc_1.4">参考资料</h2>
+<p>
+《深入理解计算机系统(Computer Systems A Programmer's Perspective)》
+</p>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
