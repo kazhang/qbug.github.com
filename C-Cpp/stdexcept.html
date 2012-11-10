@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="../shBrushJScript.js"></script>
 		<script type="text/javascript" src="../shBrushXml.js"></script>
 		<script type="text/javascript" src="../shBrushCpp.js"></script>
-        <title>2012-10-02</title>
+        <title>标准异常类</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript">
 		  var _gaq = _gaq || [];
@@ -34,15 +34,93 @@
 <div id="wrapper">
 	<div class="content">
 		
+<h1 id="toc_1" class="justcenter">标准异常类</h1>
 <p>
-第一次知道
+在&lt;stdexcept&gt;头文件中定义的标准异常类:
 </p>
-<pre>
-	./a.out &lt;in &gt;out
-</pre>
-<p>
-可以用来设定输入输出流，以后再也不用在程序里面写freopen了。
-</p>
+
+<table>
+<tr>
+<td>
+exception
+</td>
+<td>
+最常见的问题。
+</td>
+</tr>
+<tr>
+<td>
+runtime_error
+</td>
+<td>
+运行时错误：仅在运行时才能检测到的问题
+</td>
+</tr>
+<tr>
+<td>
+range_error
+</td>
+<td>
+运行时错误：生成的结果超出了有意义的值域范围
+</td>
+</tr>
+<tr>
+<td>
+overflow_error
+</td>
+<td>
+运行时错误：计算上溢
+</td>
+</tr>
+<tr>
+<td>
+underflow_error
+</td>
+<td>
+运行时错误：计算下溢
+</td>
+</tr>
+<tr>
+<td>
+logic_error
+</td>
+<td>
+逻辑错误：可在运行前检测到问题
+</td>
+</tr>
+<tr>
+<td>
+domain_error
+</td>
+<td>
+逻辑错误：参数的结果值不存在
+</td>
+</tr>
+<tr>
+<td>
+invalid_argument
+</td>
+<td>
+逻辑错误：不合适的参数
+</td>
+</tr>
+<tr>
+<td>
+length_error
+</td>
+<td>
+逻辑错误：试图生成一个超出该类型最大长度的对象
+</td>
+</tr>
+<tr>
+<td>
+out_of_range
+</td>
+<td>
+逻辑错误：使用一个超出有效范围的值
+</td>
+</tr>
+</table>
 
 	</div>
 	<script type="text/javascript">

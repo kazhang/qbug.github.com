@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="../shBrushJScript.js"></script>
 		<script type="text/javascript" src="../shBrushXml.js"></script>
 		<script type="text/javascript" src="../shBrushCpp.js"></script>
-        <title>2012-10-02</title>
+        <title>C++ Primer 笔记</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript">
 		  var _gaq = _gaq || [];
@@ -34,15 +34,49 @@
 <div id="wrapper">
 	<div class="content">
 		
-<p>
-第一次知道
-</p>
-<pre>
-	./a.out &lt;in &gt;out
+<h1 id="toc_1" class="justcenter">C++ Primer 笔记</h1>
+<ol>
+<li>
+非<code>const</code>变量默认为<code>extern</code>。要使<code>const</code>变量能够在其他的文件中访问,必须地指定它为<code>extern</code>(注：其他文件均需要声明使用的变量为extern)。
+
+<li>
+用 class 和 struct 关键字定义类的唯一差别在于默认访问级别:默认情况下,struct 的成员为 <code>public</code>,而 class 的成员为 <code>private</code>。
+
+<li>
+typedef不是简单的文本扩展，比如：
+<pre  class="brush:cpp">
+		string str="123";
+		typedef string *pstring;
+		const pstring cstr=&amp;str;//实际上等价于string *const cstr;必须赋初值。
+		pstring const cstr2=&amp;str;//与上面一句等价
 </pre>
-<p>
-可以用来设定输入输出流，以后再也不用在程序里面写freopen了。
-</p>
+
+<li>
+异常处理，参照：<a href="stdexcept.html">标准异常类列表</a>
+<pre  class="brush:cpp">
+	  try{
+		//code
+		throw runtime_error("exception description");
+		//code
+	  }catch(runtime_error err){
+		cout&lt;&lt;err.what()&lt;&lt;endl;
+	  }
+</pre>
+
+<li>
+下标操作符比圆括号优先级高：<code>foo(int (&amp;arr)[10])</code>；*操作符也一样：<code>int (*martix)[10]</code>
+
+<li>
+在无法列举出传递给函数的所有实参的类型和数目时，可以使用省略符形参。省略符形参有下列两种形式：
+<pre  class="brush:cpp">
+		  void foo(parm_list,...);
+		  void foo(...);
+</pre>
+
+<li>
+仅当形参是引用或指针时,形参是否为 const 才有影响,但不能基于指针本身是否为const来实现函数的重载。
+
+</ol>
 
 	</div>
 	<script type="text/javascript">
