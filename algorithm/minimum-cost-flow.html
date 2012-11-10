@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+		<script type="text/javascript" src="../shBrushCpp.js"></script>
+        <title>最小费用流</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+
+  	var _gaq = _gaq || [];
+  	_gaq.push(['_setAccount', 'UA-20545506-1']);
+  	_gaq.push(['_setDomainName', 'zkgo.info']);
+ 	 _gaq.push(['_trackPageview']);
+
+  	(function() {
+  	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   	 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   	 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  	})();
+
+	</script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">最小费用流</h1>
+<pre  class="brush:cpp">
+//CodeForces 237E
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;set&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int INF=1&lt;&lt;30;
+const int MAXSIZE=300;
+
+struct  Edge
+{
+	int u,v,w,c;
+	int next;
+}buf[MAXSIZE*MAXSIZE];
+
+int head[MAXSIZE];
+bool inq[MAXSIZE];
+int pre[MAXSIZE];
+int nE,ans;
+
+void addEdge(int u,int v,int w,int c)
+{
+	buf[nE].u=u;buf[nE].v=v;buf[nE].w=w;buf[nE].c=c;buf[nE].next=head[u];head[u]=nE++;
+	buf[nE].u=v;buf[nE].v=u;buf[nE].w=-w;buf[nE].c=0;buf[nE].next=head[v];head[v]=nE++;
+}
+
+int dis[MAXSIZE];
+bool spfa(int src,int des)
+{
+	memset(inq,false,sizeof(inq));
+	for(int i=0;i&lt;=des;i++)
+		dis[i]=INF;
+	dis[src]=0;
+	int frt=0,tail=0;
+	int que[MAXSIZE];
+	inq[src]=true;
+	que[tail++]=src;
+	pre[src]=-1;
+
+	while(frt&lt;tail)
+	{
+		int u=que[frt++];
+		inq[u]=false;
+		for(int i=head[u];i!=-1;i=buf[i].next)
+		{
+			int v=buf[i].v;
+			if(dis[u]+buf[i].w&lt;dis[v]&amp;&amp;buf[i].c&gt;0)
+			{
+				pre[v]=i;
+				dis[v]=dis[u]+buf[i].w;
+				if(!inq[v])
+				{
+					inq[v]=true;
+					que[tail++]=v;
+				}
+			}
+		}
+	}
+	return dis[des]&lt;INF;
+}
+
+int modify(int des)
+{
+	int mf=INF;
+	for(int i=pre[des];i!=-1;i=pre[buf[i].u])
+		if(buf[i].c&lt;mf)
+			mf=buf[i].c;
+	for(int i=pre[des];i!=-1;i=pre[buf[i].u])
+	{
+		buf[i].c-=mf;
+		buf[i^1].c+=mf;
+		ans+=mf*buf[i].w;
+	}
+	return mf;
+}
+
+int main()
+{
+	memset(head,0xff,sizeof(head));
+	char str[110];
+	cin&gt;&gt;str;
+
+	int ccnt[26]={0},need=0;
+	for(int i=0;str[i];i++)
+		ccnt[str[i]-'a']++;
+	for(int i=0;i&lt;26;i++)
+		if(ccnt[i])
+		{
+			need+=ccnt[i];
+			addEdge(0,i+1,0,ccnt[i]);
+		}
+
+	int n;
+	cin&gt;&gt;n;
+	int dst=n*2+26+1;
+
+	for(int i=1,num;i&lt;=n;i++)
+	{
+		cin&gt;&gt;str&gt;&gt;num;
+		memset(ccnt,0,sizeof(ccnt));
+		for(int j=0;str[j];j++)
+			ccnt[str[j]-'a']++;
+		for(int j=0;j&lt;26;j++)
+			if(ccnt[j])
+				addEdge(j+1,i+26,0,ccnt[j]);
+		addEdge(i+26,i+n+26,i,num);
+		addEdge(i+n+26,dst,0,INF);
+	}
+	int cnt=0;
+	while(spfa(0,dst))
+		cnt+=modify(dst);
+	if(cnt&lt;need)
+		cout&lt;&lt;-1&lt;&lt;endl;
+	else
+		cout&lt;&lt;ans&lt;&lt;endl;
+	return 0;
+}
+</pre>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
