@@ -1,0 +1,626 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="shCoreDefault.css"/>
+		<script type="text/javascript" src="shCore.js"></script>
+		<script type="text/javascript" src="shBrushPhp.js"></script>
+		<script type="text/javascript" src="shBrushJScript.js"></script>
+		<script type="text/javascript" src="shBrushXml.js"></script>
+		<script type="text/javascript" src="shBrushCpp.js"></script>
+        <title>PAT-Tips</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-36220755-1']);
+			  _gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+		  </script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="index.html">ZAKIR's wiki</a></li>
+		<li><a href="index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<div class="toc">
+<ul>
+<li><a href="#toc_1">1001. A+B Format</a>
+<li><a href="#toc_2">1002. A+B for Polynomials</a>
+<li><a href="#toc_3">1003. Emergency</a>
+<li><a href="#toc_4">1004. Counting Leaves</a>
+<li><a href="#toc_5">1005. Spell It Right</a>
+<li><a href="#toc_6">1006. Sign In and Sign Out</a>
+<li><a href="#toc_7">1007. Maximum Subsequence Sum</a>
+<li><a href="#toc_8">1008. Elevator</a>
+<li><a href="#toc_9">1009. Product of Polynomials</a>
+<li><a href="#toc_10">1010. Radix</a>
+<li><a href="#toc_11">1011. World Cup Betting</a>
+<li><a href="#toc_12">1012. The Best Rank</a>
+<li><a href="#toc_13">1013. Battle Over Cities</a>
+<li><a href="#toc_14">1014. Waiting in Line</a>
+<li><a href="#toc_15">1015. Reversible Primes</a>
+<li><a href="#toc_16">1016. Phone Bills</a>
+<li><a href="#toc_17">1017. Queueing at Bank</a>
+<li><a href="#toc_18">1018. Public Bike Management</a>
+<li><a href="#toc_19">1019. General Palindromic Number</a>
+<li><a href="#toc_20">1020. Tree Traversals</a>
+<li><a href="#toc_21">1021. Deepest Root</a>
+<li><a href="#toc_22">1022. Digital Library</a>
+<li><a href="#toc_23">1023. Have Fun with Numbers</a>
+<li><a href="#toc_24">1024. Palindromic Number</a>
+<li><a href="#toc_25">1025. PAT Ranking</a>
+<li><a href="#toc_26">1026. Table Tennis</a>
+<li><a href="#toc_27">1027. Colors in Mars</a>
+<li><a href="#toc_28">1028. List Sorting</a>
+<li><a href="#toc_29">1029. Median</a>
+<li><a href="#toc_30">1030. Travel Plan</a>
+<li><a href="#toc_31">1031. Hello World for U</a>
+<li><a href="#toc_32">1032. Sharing</a>
+<li><a href="#toc_33">1033. To Fill or Not to Fill</a>
+<li><a href="#toc_34">1034. Head of a Gang</a>
+<li><a href="#toc_35">1035. Password</a>
+<li><a href="#toc_36">1036. Boys vs Girls</a>
+<li><a href="#toc_37">1037. Magic Coupon</a>
+<li><a href="#toc_38">1038. Recover the Smallest Number</a>
+<li><a href="#toc_39">1039. Course List for Student</a>
+<li><a href="#toc_40">1040. Longest Symmetric String</a>
+<li><a href="#toc_41">1041. Be Unique</a>
+<li><a href="#toc_42">1042. Shuffling Machine</a>
+<li><a href="#toc_43">1043. Is It a Binary Search Tree</a>
+<li><a href="#toc_44">1044. Shopping in Mars</a>
+<li><a href="#toc_45">1045. Favorite Color Stripe</a>
+<li><a href="#toc_46">声明</a>
+</ul>
+</div>
+<p>
+在PAT上切题（被虐）是一件愉♂悦的事情，我无意于剥夺你的这种乐趣。但是，当你在一个坑里跳了无数回还是没跳出来，那么希望下面这些tips能够对你有帮助。
+</p>
+<h1 id="toc_1">1001. A+B Format</h1>
+<ol>
+<li>
+输出格式题
+
+<li>
+负数记得输出'-'
+
+</ol>
+
+<h1 id="toc_2">1002. A+B for Polynomials</h1>
+<p>
+像归并排序一样把两个数字序列合并就好了，若x次数不同，把次数小的先加入到结果中；次数相同系数相加，若相加后系数不为0则加入到结果中。
+</p>
+
+<h1 id="toc_3">1003. Emergency</h1>
+<ol>
+<li>
+最短路径题
+
+<li>
+先求起点为源点的单源最短路径<code>dis</code>
+
+<li>
+再求终点为源点的单源最短路径<code>rdis</code>
+
+<li>
+对于一条端点为u和v，长为c的边若<code>dis[u]+rdis[v]+c==dis[dst]||dis[v]+rdis[u]+c==dis[dst]</code>那么这条边就是最短路径上的边，做上标记。
+
+<li>
+对标记好的最短路径上的边DFS，维护医疗队最多人数和总路径数即可。
+
+<li>
+嘛，其实也可以不用两次单源最短路径，在求<code>dis</code>的时候维护一个当前节点在最短路径中前一个节点列表即可。
+
+</ol>
+
+<h1 id="toc_4">1004. Counting Leaves</h1>
+<p>
+从根节点DFS，带上当前的level，维护每层叶子节点个数即可。
+</p>
+
+<h1 id="toc_5">1005. Spell It Right</h1>
+<ol>
+<li>
+输入的数字很大，用<code>char num[101];</code>吧。
+
+<li>
+计算每一位上数字的和
+
+<li>
+写个数字到英文单词的映射，把和的每一位输出即可。
+
+</ol>
+
+<h1 id="toc_6">1006. Sign In and Sign Out</h1>
+<p>
+用string读入，字符串比较时间，维护最大和最小。
+</p>
+
+<h1 id="toc_7">1007. Maximum Subsequence Sum</h1>
+<ol>
+<li>
+最大子段和
+
+<li>
+如果输入全部为负数，输出0，并输出第一个和最后一个数字。
+
+<li>
+维护当前子段的起始位置，当<code>sum&lt;0</code>时更新起始位置，<code>sum&gt;ans</code>时更新答案。
+
+</ol>
+
+<h1 id="toc_8">1008. Elevator</h1>
+<p>
+求和。
+</p>
+
+<h1 id="toc_9">1009. Product of Polynomials</h1>
+<ol>
+<li>
+多项式乘法，记录每项次数的系数。
+
+<li>
+输出系数不为0的项的系数。
+
+</ol>
+
+<h1 id="toc_10">1010. Radix</h1>
+<ol>
+<li>
+注意溢出，建议使用long long。
+
+<li>
+直接枚举进制radix是会超时的。
+
+<li>
+试试二分radix吧，上界是目标的十进制表示。
+
+<li>
+按下面这种姿势会WA第三个,把<code>mid=(low+high)/2;</code>移到下面才过，好费解。
+<pre  class="brush:cpp">
+while(low&lt;=high)
+{
+	mid=(low+high)/2;
+	int t=check(n2,mid,target);
+	if(t&gt;=0)
+	{
+		high=mid-1;
+		if(t==0)
+			if(res1==-1||res1&gt;mid)
+				res1=mid;
+	}
+	else
+		low=mid+1;
+	//mid=(low+high)/2;
+}	
+</pre>
+
+</ol>
+
+<h1 id="toc_11">1011. World Cup Betting</h1>
+<p>
+题目没看懂，反正输出每行最大那个对应的字符，拿结果乘以最大值，最后乘以0.65，再减1，再乘2，输出。
+</p>
+
+<h1 id="toc_12">1012. The Best Rank</h1>
+<ol>
+<li>
+排序题
+
+<li>
+分别按平均分和三门课成绩排序，计算每种排序中的排名，记录最靠前的。
+
+<li>
+注意分数相同的情况，比如100 99 99 80，对应排名为1 2 2 4，而不是 1 2 2 3.
+
+</ol>
+
+<h1 id="toc_13">1013. Battle Over Cities</h1>
+<ol>
+<li>
+求无向图的连通分量数
+
+<li>
+直接DFS，对未标记的节点DFS，把所有能访问到的节点都标记上。
+
+<li>
+执行了几次DFS就有几个连通分量，答案为连通分量数-1.
+
+</ol>
+
+<h1 id="toc_14">1014. Waiting in Line</h1>
+<ol>
+<li>
+繁琐的模拟题
+
+<li>
+注意17:00关门
+
+</ol>
+
+<h1 id="toc_15">1015. Reversible Primes</h1>
+<p>
+反转，判定素数。
+</p>
+
+<h1 id="toc_16">1016. Phone Bills</h1>
+<ol>
+<li>
+繁琐的模拟题。
+
+<li>
+按时间排序后处理起来会比较舒服。
+
+<li>
+注意过滤掉不匹配的电话
+
+<li>
+注意某些时段话费可以为0.
+
+<li>
+貌似不产生话费的用户可以不用输出。
+
+</ol>
+
+<h1 id="toc_17">1017. Queueing at Bank</h1>
+<ol>
+<li>
+模拟题。
+
+<li>
+对每个顾客按到达时间排序。
+
+<li>
+注意每人最多服务1小时。
+
+<li>
+维护当前每个窗口变成可用的时间点。
+
+<li>
+对于每个顾客，寻找最早可用的窗口，更新该窗口可用时间点。
+
+<li>
+注意17点关门，到达时间大于17点的得不到服务，不计入平均值。
+
+</ol>
+
+<h1 id="toc_18">1018. Public Bike Management</h1>
+<ol>
+<li>
+坑
+
+</ol>
+
+<h1 id="toc_19">1019. General Palindromic Number</h1>
+<ol>
+<li>
+进制转换
+
+<li>
+n可以为0
+
+</ol>
+
+<h1 id="toc_20">1020. Tree Traversals</h1>
+<p>
+根据后序遍历和中序遍历序列建树，输出层序遍历序列，数据结构基础。
+</p>
+
+<h1 id="toc_21">1021. Deepest Root</h1>
+<ol>
+<li>
+先用DFS求一次图的连通分量数，大于1则直接按题目要求输出。
+
+<li>
+因为题目所求根节点的度必为1，所以维护所有节点的度数。
+
+<li>
+对度数为1的节点DFS，记录遍历树最长深度以及对应的节点。
+
+</ol>
+
+<h1 id="toc_22">1022. Digital Library</h1>
+<ol>
+<li>
+用gets或fgets会比较舒服。
+
+<li>
+最好先按书的ID排序好。
+
+<li>
+时限比较松，暴力地查找吧。
+
+</ol>
+
+<h1 id="toc_23">1023. Have Fun with Numbers</h1>
+<ol>
+<li>
+数字比较大，不要试图使用int或者long long，用高精度乘法吧。
+
+<li>
+统计原来的数中每个数字出现次数，统计乘2后每个数字出现次数，对比得到结果。
+
+</ol>
+
+<h1 id="toc_24">1024. Palindromic Number</h1>
+<ol>
+<li>
+数字很大，还得用高精度。
+
+<li>
+本身就是回文数的直接输出。
+
+<li>
+不停用高精度加法，直到得到回文数为止。
+
+</ol>
+
+<h1 id="toc_25">1025. PAT Ranking</h1>
+<ol>
+<li>
+排序题。
+
+<li>
+与1012类似。
+
+</ol>
+
+<h1 id="toc_26">1026. Table Tennis</h1>
+<ol>
+<li>
+大坑
+
+<li>
+VIP会员在VIP桌和普通桌可用的时候优先选择VIP桌。
+
+</ol>
+
+<h1 id="toc_27">1027. Colors in Mars</h1>
+<p>
+输入输出题。
+</p>
+
+<h1 id="toc_28">1028. List Sorting</h1>
+<ol>
+<li>
+排序题。
+
+<li>
+用cin会超时？
+
+</ol>
+
+<h1 id="toc_29">1029. Median</h1>
+<p>
+参照归并排序。
+</p>
+
+<h1 id="toc_30">1030. Travel Plan</h1>
+<p>
+参照1003
+</p>
+
+<h1 id="toc_31">1031. Hello World for U</h1>
+<p>
+输入输出题，留意N=5.
+</p>
+
+<h1 id="toc_32">1032. Sharing</h1>
+<p>
+两种方法
+</p>
+<ol>
+<li>
+分别遍历两个链表，若最终字符相同，则说明有共同部分，令<code>dif=abs(lenA-lenB)</code>，令两指针再次指向各自的头，较长的先移动dif步，然后同时向前移动，直到两指针指向的地址相同。
+
+<li>
+维护两个栈，分别遍历两个链表，一边遍历一边把节点压入栈中，遍历结束后比较栈顶，若栈顶相同，同时弹栈，直到栈顶的节点不同为止。
+
+</ol>
+
+<h1 id="toc_33">1033. To Fill or Not to Fill</h1>
+<ol>
+<li>
+很容易误认为是DP的贪心题。
+
+<li>
+可以想象成用不同的油漆涂抹一条道理，按油漆价格排序，先处理便宜的。
+
+<li>
+用油漆从油漆桶（加油站）的位置开始涂抹，跳过已经被涂抹的路段，直到油漆用完。
+
+<li>
+检查整条道路是否都被涂上了颜色。
+
+<li>
+计算每种油漆涂抹的距离，计算费用。
+
+</ol>
+
+<h1 id="toc_34">1034. Head of a Gang</h1>
+<ol>
+<li>
+并查集
+
+<li>
+处理名字比较恶心，用map吧。
+
+<li>
+打电话的时间是相互的。
+
+<li>
+记录每个人的通话时间。
+
+<li>
+划分好集合后记录每个集合通话时间最长的人的编号。
+
+<li>
+按题目条件（好繁琐啊）筛出答案。
+
+</ol>
+
+<h1 id="toc_35">1035. Password</h1>
+<p>
+映射，输入输出题。
+</p>
+
+<h1 id="toc_36">1036. Boys vs Girls</h1>
+<p>
+输入输出题。
+</p>
+
+<h1 id="toc_37">1037. Magic Coupon</h1>
+<ol>
+<li>
+把优惠券从小到大排序，把商品按从小到大排序。贪心。
+
+<li>
+两个指针分别指向优惠券和商品的头，一边相乘把乘积加到结果，一边向前移动。直到某个指针指向的数大于0.
+
+<li>
+两个指针分别指向优惠券和商品的末尾，一边相乘把乘积加到结果，一边向前移动。直到某个指针指向的数小于0.
+
+<li>
+输出结果。
+
+</ol>
+
+<h1 id="toc_38">1038. Recover the Smallest Number</h1>
+<ol>
+<li>
+把所有的数字按照字典序从大到小排序。
+
+<li>
+把所有数字按排序的顺序输出，注意前导0 。
+
+<li>
+注意答案为0的情况。
+
+</ol>
+
+<h1 id="toc_39">1039. Course List for Student</h1>
+<ol>
+<li>
+用map映射人名到ID。
+
+<li>
+vector维护每个课程注册的学生ID。
+
+<li>
+按课程ID从小到大处理，把每个课程的ID添加到注册这个课程的学生的vector中。
+
+<li>
+读入查询，输出结果。
+
+<li>
+把student数组开到40010老是越界，乘10以后就过了。
+
+</ol>
+
+<h1 id="toc_40">1040. Longest Symmetric String</h1>
+<ol>
+<li>
+fgets()或gets()读入
+
+<li>
+长度为1则直接输出
+
+<li>
+令每个位置为中点，然后左右探查求解。
+
+</ol>
+
+<h1 id="toc_41">1041. Be Unique</h1>
+<ol>
+<li>
+统计每个数字出现次数
+
+<li>
+输出下标从小到大第一个出现次数为1的数字。没有输出None。
+
+</ol>
+
+<h1 id="toc_42">1042. Shuffling Machine</h1>
+<p>
+位置映射
+</p>
+
+<h1 id="toc_43">1043. Is It a Binary Search Tree</h1>
+<ol>
+<li>
+按照二叉搜索树前序遍历得到的序列插入可以重建原树？待证明。
+
+<li>
+总之按照输入序列按两种方法插入一颗空树，然后前序遍历得到的树，看是否与输入相同。
+
+<li>
+若能构造原树，输出后序遍历序列。
+
+</ol>
+
+<h1 id="toc_44">1044. Shopping in Mars</h1>
+<ol>
+<li>
+从左往右扫描，维护一个区间所有数的和，区间右端点不断右移。
+
+<li>
+若当前的和大于所求的数，区间左端点向右移动，直到区间的和小于等于所求的数。
+
+<li>
+扫描的时候记录离所求的数最接近的区间和，并记录区间左右端点。
+
+</ol>
+
+<h1 id="toc_45">1045. Favorite Color Stripe</h1>
+<ol>
+<li>
+把喜欢的数字序列中的每个数字map到它的下标（或者说等级）。
+
+<li>
+把输入序列的每个数字利用上面的map转成数字的等级，不在喜欢的数字中的数字忽略掉。
+
+<li>
+问题转化成最长上升子序列问题。
+
+<li>
+L的范围比较大，最好用O(NlogN)的解法，即维护一个栈，若当前数字比栈顶元素大，压入栈中；否则二分当前的栈，找到第一个大于当前数字的位置，用当前数字替换掉，最后输出栈的大小。
+
+</ol>
+
+<h1 id="toc_46">声明</h1>
+<ol>
+<li>
+不保证以上内容的正确性，如果你看了以后把题过了，这只是巧合。
+
+<li>
+对以上内容不保留任何权利，请随意。
+
+<li>
+对以上内容不承担任何法律责任，寝室没水表，不爱喝茶。
+
+</ol>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
