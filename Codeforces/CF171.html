@@ -1,0 +1,260 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+		<script type="text/javascript" src="../shBrushCpp.js"></script>
+        <title>Codeforces Round #171(Div.2)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-36220755-1']);
+			  _gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+		  </script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">Codeforces Round #171(Div.2)</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Codeforces Round #171(Div.2)</a>
+<ul>
+<li><a href="#toc_1.1">A. Point on Spiral</a>
+<ul>
+<li><a href="#toc_1.1.1">问题描述</a>
+<li><a href="#toc_1.1.2">思路</a>
+</ul>
+<li><a href="#toc_1.2">B. Books</a>
+<ul>
+<li><a href="#toc_1.2.1">问题描述</a>
+<li><a href="#toc_1.2.2">思路</a>
+</ul>
+<li><a href="#toc_1.3">C. Ladder</a>
+<ul>
+<li><a href="#toc_1.3.1">问题描述</a>
+<li><a href="#toc_1.3.2">思路</a>
+</ul>
+<li><a href="#toc_1.4">D</a>
+<ul>
+<li><a href="#toc_1.4.1">问题描述</a>
+<li><a href="#toc_1.4.2">思路</a>
+</ul>
+<li><a href="#toc_1.5">E. Beautiful Decomposition</a>
+<ul>
+<li><a href="#toc_1.5.1">问题描述</a>
+<li><a href="#toc_1.5.2">思路</a>
+</ul>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1" class="justcenter">A. Point on Spiral</h2>
+<h3 id="toc_1.1.1">问题描述</h3>
+<p>
+在坐标系上画一个螺旋型的图形，如用[ (0, 0), (1, 0)]表示坐标(0,0)到坐标(1,0)的直线，则图形表示为：[ (0, 0), (1, 0)], [(1, 0), (1, 1)], [(1, 1), ( - 1, 1)], [( - 1, 1), ( - 1,  - 1)], [( - 1,  - 1), (2,  - 1)], [(2,  - 1), (2, 2)]... ...，求从(0, 0)开始沿着直线走到(x,y)点需要拐几次弯。
+</p>
+<h3 id="toc_1.1.2">思路</h3>
+<p>
+(x,y)不仅可以是拐点，还可以是线段中间的点。在纸上画一画找出规律即可。比如在第一象限，x和y的最大值即是当前这圈的编号，因为每层4个拐点，拐点数等于内层圈数*4+1，+1是因为当前这圈在第四象限那个拐点。类似的，第二象限+2，第三象限+3，第四象限不用加。
+</p>
+
+<h2 id="toc_1.2" class="justcenter">B. Books</h2>
+<h3 id="toc_1.2.1">问题描述</h3>
+<p>
+给出读每本书的时间a<sub><small>i</small></sub>，和总共可用时间t，问最多可以连续读多少书（若时间不够读完一本书则不算）
+</p>
+<h3 id="toc_1.2.2">思路</h3>
+<p>
+常见题，“滑动窗口”，从左往右扫，维护一个窗口，使得读完窗口内的书的时间和不大于总时间。
+</p>
+
+<h2 id="toc_1.3" class="justcenter">C. Ladder</h2>
+<h3 id="toc_1.3.1">问题描述</h3>
+<p>
+给定一组数字，有m次查询，每次查询询问l,r直接的数字是否是先升后降的（前半部分非递减，后半部分非递增），只上升或只下降也算。
+</p>
+<h3 id="toc_1.3.2">思路</h3>
+<p>
+数字个数最大为10<sup><small>5</small></sup>，最多查询10<sup><small>5</small></sup>次，所以每次查询都从arr[l]扫到arr[r]是不可行的。我们可以为每个连续上升和下降区域编号。上升的用正数表示，下降的用负数表示。比如：
+</p>
+
+<table>
+<tr>
+<td>
+&nbsp;
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+6
+</td>
+<td>
+7
+</td>
+</tr>
+<tr>
+<td>
+a[i]
+</td>
+<td>
+1
+</td>
+<td>
+4
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+mark[i]
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+<td>
+-2
+</td>
+</tr>
+</table>
+
+<p>
+上面的数列中，0~3就是一个先升后降的序列，可以看到mark[0]&gt;0且mark[0]=-1*mark[3]；4~6也是满足条件的（只升）,mark[3]=mark[6]；因此我们可以认为若满足mark[l]==mark[r]或者mark[l]&gt;0而且mark[l]=-1*mark[r]，这样的数列是ladder。但是，会有一个问题，2~5其实也是满足条件的（只升）,但是mark[2]由于arr[2]&lt;arr[1]被划定为下降区了，而arr[2]=arr[3],arr[3]&lt;arr[4]，所以我们需要判定这样的临界点，另l一直往左移动，直到arr[l]!=arr[l+1]或者与r重合，如果arr[l]&lt;arr[l+1]，那么我们可以令mark[i]=mark[i+1]，再做比较就可以了。（其实CF数据不够严谨，如果查询10<sup><small>4</small></sup>次长为10<sup><small>4</small></sup>且值相等的数列，那就会超时了）
+</p>
+
+<h2 id="toc_1.4" class="justcenter">D</h2>
+<h3 id="toc_1.4.1">问题描述</h3>
+<p>
+给出一串数字，把第一个数字放到寄存器中，用这个值与自身相加得出给定数字的第二个，然后你可以选择用再一个寄存器保存这个值，或者保存到刚才的寄存器，或者不存。接着用寄存器的数进行一次加法得到第三个数，第四个数。。。每次都可以选择是否保存当前的数，是否使用新的寄存器，问最少需要几个寄存器求得所有的数，若不行则输出-1.
+</p>
+<h3 id="toc_1.4.2">思路</h3>
+<p>
+坑。
+</p>
+
+<h2 id="toc_1.5" class="justcenter">E. Beautiful Decomposition</h2>
+<h3 id="toc_1.5.1">问题描述</h3>
+<p>
+问最少需要几个2<sup><small>k</small></sup>或-2<sup><small>k</small></sup>这样的数相加得到数字n，n以二进制形式给出，长度最长为10<sup><small>6</small></sup>。
+</p>
+<h3 id="toc_1.5.2">思路</h3>
+<p>
+对于二进制数110 1101，我们可以用1000 0000减去1 0000得到110 0000，再减去100得到110 1100，在加上1得到110 1101。可以观察到，对于111这样的片段，我们总可以先加上1000再减去1两步得到（下文称为“两步操作”），这样比加三次1要少一步。对于11这样的片段，我们既可以加两次1，也可以用两步操作。对于11 1011这样的片段，与其111和11分别进行两次两步操作，不如一次两步操作得到11 1111再加上-100得到11 1011，这样只需三步即可。当然，如果两个1片段之间隔的0多于2，合并两次两步操作就不值了。我们可以维护一个0的个数计数器，在从左往右扫描的过程中，如果碰到1，统计右边1的个数，若仅有这一个1，若前面的0不止一个，那么拼到前面显然不值直接在该位置加1吧，若1的个数大于1且前面0的个数等于1，直接拼上去，若前面没有两次操作生成的片段，则答案要再加一次1（自己进行两步操作），最后，如果前面的0不止1个，那么对这个位置进行两步操作吧。
+</p>
+<pre  class="brush:cpp">
+bool can=false;
+for(int i=0;buf[i];++i)
+{
+	if(buf[i]=='1')
+	{
+		int cnt=0;
+		while(buf[i+cnt]=='1')cnt++;
+
+		if(cnt==1)
+		{
+			if(cnt0&gt;1)
+				can=false;
+			ans+=1;
+		}
+		else if(cnt0==1)
+		{
+			ans+=1;
+			if(!can)
+				ans++;
+			can=true;
+		}
+		else
+		{
+			ans+=2;
+			can=true;
+		}
+		i+=cnt-1;
+		cnt0=0;
+	}	
+	else
+		cnt0++;
+}
+</pre>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
