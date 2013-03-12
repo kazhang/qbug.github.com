@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../myStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="../shCoreDefault.css"/>
+		<script type="text/javascript" src="../shCore.js"></script>
+		<script type="text/javascript" src="../shBrushPhp.js"></script>
+		<script type="text/javascript" src="../shBrushJScript.js"></script>
+		<script type="text/javascript" src="../shBrushXml.js"></script>
+		<script type="text/javascript" src="../shBrushCpp.js"></script>
+        <title>Codeforces Round #172</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-36220755-1']);
+			  _gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+		  </script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="../index.html">ZAKIR's wiki</a></li>
+		<li><a href="../index.html">首页</a></li>
+		<li><a href="http://www.zkgo.info/blog" target="_blank">博客</a></li>
+		<li><a href="http://github.com/qBug" target="_blank">Github</a></li>
+	</ul>
+</div>
+<div id="wrapper">
+	<div class="content">
+		
+<h1 id="toc_1" class="justcenter">Codeforces Round #172</h1>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Codeforces Round #172</a>
+<ul>
+<li><a href="#toc_1.1">A. Word Capitalization</a>
+<ul>
+<li><a href="#toc_1.1.1">问题描述：</a>
+<li><a href="#toc_1.1.2">思路：</a>
+</ul>
+<li><a href="#toc_1.2">B. Nearest Fraction</a>
+<ul>
+<li><a href="#toc_1.2.1">问题描述：</a>
+<li><a href="#toc_1.2.2">思路：</a>
+</ul>
+<li><a href="#toc_1.3">C. Rectangle Puzzle</a>
+<li><a href="#toc_1.4">D. Maximum Xor Secondary</a>
+<ul>
+<li><a href="#toc_1.4.1">问题描述：</a>
+<li><a href="#toc_1.4.2">思路：</a>
+</ul>
+<li><a href="#toc_1.5">E. Game on Tree</a>
+</ul>
+</ul>
+</div>
+<h2 id="toc_1.1" class="justcenter">A. Word Capitalization</h2>
+<h3 id="toc_1.1.1">问题描述：</h3>
+<p>
+把字符串的第一个字符从小写替换成大写。
+</p>
+<h3 id="toc_1.1.2">思路：</h3>
+<p>
+把字符串的第一个字符从小写替换成大写。
+</p>
+
+<h2 id="toc_1.2" class="justcenter">B. Nearest Fraction</h2>
+<h3 id="toc_1.2.1">问题描述：</h3>
+<p>
+给出x, y, n。找出整数对a, b(1&lt;=b&lt;=n; 0&lt;=a)， 使得|x/y-a/b|值最小。(1&lt;=x,y,n&lt;=10<sup><small>5</small></sup>)
+</p>
+<h3 id="toc_1.2.2">思路：</h3>
+<p>
+由于n的范围很小，完全可以枚举b，a=floor(x*b/y)或者a=floor(x*b/y)+1。用结构体保存答案，定义一下&lt;操作符。得出使结果绝对值最小，分母最小，分子最小的答案。
+</p>
+ 
+<h2 id="toc_1.3" class="justcenter">C. Rectangle Puzzle</h2>
+<p>
+多图，先坑着
+</p>
+
+<h2 id="toc_1.4" class="justcenter">D. Maximum Xor Secondary</h2>
+<h3 id="toc_1.4.1">问题描述：</h3>
+<p>
+定义lucky number为一段数字中最大的两个异或后的值，给出一组不相同的数字，从中找出连续的一段，使lucky number最大。
+</p>
+<h3 id="toc_1.4.2">思路：</h3>
+<p>
+要使异或的结果最大，那么假定最大的数字的二进制表示最高位1位于k，那么我们只需要找一个k处不为1的与k处为1的异或，可保证结果的k处为1，而且不可能有比k处更高的位数为1。那么我们对于每个k处为1的数字，寻找与它异或后结果最大的数字即可。如果所有数字k处都为1，那么k--,再check是不是所有数字在k处都为1，因为数字都是不一样的，所以肯定能找到合适的k。
+</p>
+
+<p>
+由于题目要求必须是一段数字里面最大和次大的异或，我们可以先从左往右扫，一边扫一边更新从上一个k处为1的数字后面到当前的最大的数字subMax，如果当前数字k处为1，那么把当前值与subMax异或，与答案比较。这样得出的结果是次大在最大的左边。我们再从右往左扫一遍，与上一遍一样。得到次大在最大右边的情况下的最大值。比较后得出答案。
+</p>
+<h2 id="toc_1.5" class="justcenter">E. Game on Tree</h2>
+<p>
+坑。
+</p>
+
+	</div>
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+		</script> 
+		<div id="footer">
+			<hr>
+			<div><a href="index.html">首页</a> | <a href="http://www.zkgo.info/blog/?page_id=2">关于</a> | <a href="http://www.zkgo.info/blog/?page_id=2">与我联系</a> | <a href="http://zkgo.info/blog" target="_blank">博客</a></div>
+			<div>Powered by Vimwiki. Hosted on Github. &copy; 2012 ZAKIR</div>
+		</div>
+</div>
+</body>
+</html>
+
